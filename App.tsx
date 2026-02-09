@@ -6,6 +6,7 @@ import Hero from './components/Hero';
 const TechStack = React.lazy(() => import('./components/TechStack'));
 const Services = React.lazy(() => import('./components/Services'));
 const About = React.lazy(() => import('./components/About'));
+const Plans = React.lazy(() => import('./components/Plans'));
 const Portfolio = React.lazy(() => import('./components/Portfolio'));
 const Features = React.lazy(() => import('./components/Features'));
 const CallToAction = React.lazy(() => import('./components/CallToAction'));
@@ -50,6 +51,7 @@ export default function App() {
           <div id="about"><About /></div>
           <div id="portfolio"><Portfolio /></div>
           <Features />
+          <div id="plans"><Plans /></div>
           <div id="contact"><CallToAction /></div>
         </Suspense>
       </main>
