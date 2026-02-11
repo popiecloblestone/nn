@@ -34,7 +34,7 @@ const BirdsCanvas: React.FC<{ className?: string }> = ({ className }) => {
         }
 
         const birds: Bird[] = [];
-        const birdCount = 3;
+        const birdCount = 5;
         const colors = ['#22d3ee', '#06b6d4', '#0891b2', '#ffffff']; // Cyan tones + White
 
         const initBirds = () => {
@@ -47,7 +47,7 @@ const BirdsCanvas: React.FC<{ className?: string }> = ({ className }) => {
                     z: z,
                     speed: (Math.random() * 1.5 + 1.0) * z, // Faster if closer (parallax)
                     wingSpan: (Math.random() * 10 + 15) * z,
-                    flapSpeed: (Math.random() * 0.1 + 0.1),
+                    flapSpeed: (Math.random() * 0.06 + 0.08), // Slower, more fluid: 0.08 to 0.14
                     flapOffset: Math.random() * Math.PI * 2,
                     color: colors[Math.floor(Math.random() * colors.length)]
                 });
@@ -108,11 +108,11 @@ const BirdsCanvas: React.FC<{ className?: string }> = ({ className }) => {
                 // Wing Geometry Helper
                 const drawWing = (isNear: boolean) => {
                     const side = isNear ? 1 : -1;
-                    const phaseLag = isNear ? 0 : 0.2; // slight delay for far wing
+                    const phaseLag = isNear ? 0 : 0.15; // Slight delay for far wing
 
                     const localCycle = Math.sin(time * bird.flapSpeed + bird.flapOffset + phaseLag);
-                    const iAng = localCycle * 0.6 * side;
-                    const oAng = (localCycle * 1.0 + (localCycle < 0 ? 0.4 : -0.2)) * side;
+                    const iAng = localCycle * 0.45 * side; // Reduced from 0.6 for smoother motion
+                    const oAng = (localCycle * 0.75 + (localCycle < 0 ? 0.3 : -0.15)) * side; // Reduced from 1.0
 
                     // Shoulder (Fixed on body)
                     const sx = renderX + s(5);

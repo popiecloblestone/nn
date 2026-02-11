@@ -1,5 +1,4 @@
 import React, { Suspense } from 'react';
-import Header from './components/Header';
 import Hero from './components/Hero';
 
 // Lazy load heavy/below-the-fold components
@@ -22,27 +21,37 @@ const SectionLoader = () => (
 
 export default function App() {
   return (
-    <div className="min-h-screen relative bg-background-dark">
-      {/* Grid Pattern Background */}
-      <div className="fixed inset-0 tech-grid pointer-events-none z-0 opacity-20"></div>
+    <div className="min-h-screen relative overflow-x-hidden">
+      {/* Main Background with Gradient - Brighter lighting */}
+      <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-cyan-900 z-0"></div>
 
+      {/* Tech Grid Pattern Overlay - More visible */}
+      <div className="fixed inset-0 opacity-30 z-0" style={{
+        backgroundImage: `
+          linear-gradient(to right, rgba(6, 182, 212, 0.15) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(6, 182, 212, 0.15) 1px, transparent 1px)
+        `,
+        backgroundSize: '60px 60px'
+      }}></div>
 
+      {/* Flying Birds Background */}
+      <div className="fixed inset-0 pointer-events-none z-0 opacity-60">
+        <Suspense fallback={null}>
+          <BirdsCanvas className="w-full h-full" />
+        </Suspense>
+      </div>
 
-      <Header />
-      <main className="relative z-10 pt-24 pb-16">
-        <div className="gradient-blob top-0 left-1/2 -translate-x-1/2 opacity-40 mix-blend-screen"></div>
+      {/* Enhanced Glow Effects - Brighter */}
+      <div className="fixed top-0 right-1/4 w-[600px] h-[600px] bg-cyan-500/15 rounded-full blur-3xl z-0 pointer-events-none"></div>
+      <div className="fixed bottom-0 left-1/4 w-[500px] h-[500px] bg-cyan-400/12 rounded-full blur-3xl z-0 pointer-events-none"></div>
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-cyan-300/8 rounded-full blur-3xl z-0 pointer-events-none"></div>
 
-        <div className="fixed inset-0 pointer-events-none z-0 opacity-50">
-          {/* Faint Background Logo */}
-          {/* Bottom Right Logo Watermark */}
-          <div className="absolute bottom-8 right-8 z-0 opacity-80 pointer-events-none">
-            <img src="/logo.png" alt="" className="w-16 h-auto object-contain opacity-50" />
-          </div>
-          <Suspense fallback={null}>
-            <BirdsCanvas className="w-full h-full" />
-          </Suspense>
-        </div>
+      {/* Logo Watermark */}
+      <div className="fixed bottom-8 right-8 z-0 opacity-10 pointer-events-none">
+        <img src="/logo.png" alt="" className="w-16 h-auto object-contain" />
+      </div>
 
+      <main className="relative z-10">
         <Hero />
 
         <Suspense fallback={<SectionLoader />}>
