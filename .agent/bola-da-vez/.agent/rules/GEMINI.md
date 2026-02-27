@@ -22,7 +22,7 @@ Agent activated → Check frontmatter "skills:" → Read SKILL.md (INDEX) → Re
 ### 2. Enforcement Protocol
 
 1. **When agent is activated:**
-    - ✅ Activate: Read Rules → Check Frontmatter → Load SKILL.md → Apply All.
+   - ✅ Activate: Read Rules → Check Frontmatter → Load SKILL.md → Apply All.
 2. **Forbidden:** Never skip reading agent rules or skill instructions. "Read → Understand → Apply" is mandatory.
 
 ---
@@ -251,3 +251,12 @@ When user's prompt is NOT in English:
 - **Test**: `playwright_runner.py`, `test_runner.py`
 
 ---
+
+## 6. AUTOMATED RESEARCH PROTOCOL (PRE-FLIGHT CHECK)
+
+- **Search-Before-Code:** É terminantemente proibido iniciar qualquer tarefa de Frontend ou UI/UX sem antes realizar uma pesquisa via `Google Search` para referências atuais.
+- **Niche Benchmarking:** Para cada projeto, busque especificamente por:
+  1. "Best [Niche] Landing Pages 2026"
+  2. "Award-winning [Tech Stack] UI examples"
+  3. "High-conversion UX patterns for [Target Audience]"
+- **Anti-Banalization:** Se o resultado da pesquisa for similar ao que você já conhece, você deve cavar mais fundo em sites como _Godly.website_ ou _Lapa.ninja_ até encontrar algo disruptivo.

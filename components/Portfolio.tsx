@@ -1,192 +1,213 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import FadeIn from './FadeIn';
 
 const Portfolio: React.FC = () => {
+  // Parallax setup for Bola da Vez 10
+  const ref1 = useRef(null);
+  const { scrollYProgress: scrollYProgress1 } = useScroll({
+    target: ref1,
+    offset: ["start end", "end start"]
+  });
+  const y1 = useTransform(scrollYProgress1, [0, 1], ["-10%", "10%"]);
+
+  // Parallax setup for Sim Mais Seguros
+  const ref2 = useRef(null);
+  const { scrollYProgress: scrollYProgress2 } = useScroll({
+    target: ref2,
+    offset: ["start end", "end start"]
+  });
+  const y2 = useTransform(scrollYProgress2, [0, 1], ["-10%", "10%"]);
+
   return (
-    <section className="py-24 relative" id="portfolio">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section className="py-32 relative z-10" id="portfolio">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
-        {/* Section Header (Optional, or can be integrated into the card like About) */}
-        {/* Keeping strict to "About" layout, let's put it inside or keep consistent title? 
-            About has "Sobre Mim" tag inside. Let's do similar. */}
+        {/* Section Header */}
+        <FadeIn className="flex flex-col items-center text-center mb-20">
+          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
+            Capacidades em <span className="text-zinc-500">Produção</span>
+          </h2>
+          <p className="text-zinc-400 font-light max-w-2xl">
+            Estudos de caso de arquiteturas implantadas, demonstrando resiliência técnica e impacto no core business.
+          </p>
+        </FadeIn>
 
-        <div className="glass-card rounded-3xl p-8 md:p-12 border border-white/20 dark:border-slate-800 bg-white/50 dark:bg-slate-900/40">
-          <div className="flex flex-col md:flex-row items-center gap-12">
+        {/* Bola da Vez 10 Card */}
+        <FadeIn delay={0.2}>
+          <div className="relative overflow-hidden rounded-4xl p-8 md:p-14 border border-white/5 bg-zinc-950/40 backdrop-blur-xl mb-12 group">
+            <div className="flex flex-col md:flex-row items-center gap-14">
 
-            {/* Image Section (Left) */}
-            <div className="flex-shrink-0 relative group w-full md:w-1/2">
-              <div className="absolute -inset-3 bg-gradient-to-br from-primary to-blue-600 rounded-2xl opacity-20 group-hover:opacity-40 blur-lg transition duration-500"></div>
-              <div className="relative overflow-hidden rounded-2xl shadow-xl border border-white/10">
-                <img
-                  alt="Bola da Vez 10 Dashboard"
-                  className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
-                  src="/Captura de tela 2026-02-18 153819.png"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
-              </div>
-            </div>
-
-            {/* Content Section (Right) */}
-            <div className="flex-1 text-center md:text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/20 text-primary text-xs font-bold uppercase tracking-wide mb-6">
-                Case de Sucesso
-              </div>
-
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6">
-                Bola da Vez <span className="text-primary">10</span>
-              </h2>
-
-              <div className="space-y-6 text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-8">
-                <p>
-                  E-commerce SaaS completo para gestão de vendas online. Uma plataforma robusta que transformou a maneira como administram suas vendas.
-                </p>
-
-                <div className="flex flex-wrap justify-center md:justify-start gap-4">
-                  <div className="flex items-center gap-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/10 px-4 py-2 rounded-lg border border-emerald-100 dark:border-emerald-800/30">
-                    <span className="material-symbols-outlined text-lg">trending_up</span>
-                    <span>+25% Retenção</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/10 px-4 py-2 rounded-lg border border-blue-100 dark:border-blue-800/30">
-                    <span className="material-symbols-outlined text-lg">speed</span>
-                    <span>Performance Extrema</span>
-                  </div>
+              {/* Image Section (Left) */}
+              <div ref={ref1} className="shrink-0 relative w-full md:w-[55%]">
+                <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-zinc-900 group-hover:border-white/20 transition-colors duration-700 h-[300px] sm:h-[400px]">
+                  <motion.img
+                    style={{ y: y1 }}
+                    alt="Bola da Vez 10 Dashboard"
+                    className="absolute inset-0 w-full h-[120%] object-cover object-top transform group-hover:scale-[1.03] transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]"
+                    src="/Captura de tela 2026-02-18 153819.png"
+                  />
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
+              {/* Content Section (Right) */}
+              <div className="flex-1">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 text-zinc-300 text-xs font-semibold tracking-widest uppercase mb-6 bg-white/5">
+                  E-Commerce SaaS
+                </div>
+
+                <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">
+                  Bola da Vez 10
+                </h3>
+
+                <div className="space-y-6 text-zinc-400 font-light text-lg leading-relaxed mb-10">
+                  <p>
+                    Plataforma completa de e-commerce e gestão. Arquitetura serverless que garantiu processamento seguro de pagamentos e escalabilidade automatizada em picos de acesso.
+                  </p>
+
+                  <div className="flex flex-wrap gap-3">
+                    <div className="flex items-center gap-2 text-xs font-medium text-white bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                      Next.js
+                    </div>
+                    <div className="flex items-center gap-2 text-xs font-medium text-white bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                      Supabase
+                    </div>
+                    <div className="flex items-center gap-2 text-xs font-medium text-white bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                      Tailwind CSS
+                    </div>
+                  </div>
+                </div>
+
                 <a
                   href="https://boladavez10.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-white text-base font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] hover:-translate-y-1"
+                  className="inline-flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-black font-semibold tracking-wide transition-all duration-300 hover:scale-[1.02] hover:bg-zinc-200"
                 >
-                  Visitar Projeto
-                  <span className="material-symbols-outlined">arrow_outward</span>
+                  Documentação Técnica
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
                 </a>
               </div>
-            </div>
 
+            </div>
           </div>
-        </div>
+        </FadeIn>
 
         {/* Sim Mais Seguros Card */}
-        <div className="glass-card rounded-3xl p-8 md:p-12 border border-white/20 dark:border-slate-800 bg-white/50 dark:bg-slate-900/40 mt-8">
-          <div className="flex flex-col md:flex-row items-center gap-12">
-
-            {/* Image Section (Left) */}
-            <div className="flex-shrink-0 relative group w-full md:w-1/2">
-              <div className="absolute -inset-3 bg-gradient-to-br from-primary to-blue-600 rounded-2xl opacity-20 group-hover:opacity-40 blur-lg transition duration-500"></div>
-              <div className="relative overflow-hidden rounded-2xl shadow-xl border border-white/10">
-                <img
+        <FadeIn delay={0.3}>
+          <div className="relative overflow-hidden rounded-4xl p-8 md:p-14 border border-white/5 bg-zinc-950/40 backdrop-blur-xl mb-12 group flex flex-col md:flex-row-reverse items-center gap-14">
+            
+            {/* Image Section (Right) */}
+            <div ref={ref2} className="shrink-0 relative w-full md:w-[55%]">
+              <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-zinc-900 group-hover:border-white/20 transition-colors duration-700 h-[300px] sm:h-[400px]">
+                <motion.img
+                  style={{ y: y2 }}
                   alt="Sim Mais Seguros Website"
-                  className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
+                  className="absolute inset-0 w-full h-[120%] object-cover object-top transform group-hover:scale-[1.03] transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]"
                   src="/Captura de tela 2026-02-18 153446.png"
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
               </div>
             </div>
 
-            {/* Content Section (Right) */}
-            <div className="flex-1 text-center md:text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/20 text-primary text-xs font-bold uppercase tracking-wide mb-6">
-                Case de Sucesso
+            {/* Content Section (Left) */}
+            <div className="flex-1">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 text-zinc-300 text-xs font-semibold tracking-widest uppercase mb-6 bg-white/5">
+                Plataforma Institucional
               </div>
 
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6">
-                Sim Mais <span className="text-primary">Seguros</span>
-              </h2>
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">
+                Sim Mais Seguros
+              </h3>
 
-              <div className="space-y-6 text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-8">
+              <div className="space-y-6 text-zinc-400 font-light text-lg leading-relaxed mb-10">
                 <p>
-                  Site institucional completo para corretora de seguros e produtos financeiros. Plataforma que conecta clientes às melhores seguradoras do mercado.
+                  Pipeline de captação de leads otimizado para o setor financeiro. Otimização profunda de SEO técnico e fluxos de navegação focados em redução de abandono.
                 </p>
 
-                <div className="flex flex-wrap justify-center md:justify-start gap-4">
-                  <div className="flex items-center gap-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/10 px-4 py-2 rounded-lg border border-emerald-100 dark:border-emerald-800/30">
-                    <span className="material-symbols-outlined text-lg">shield</span>
-                    <span>Seguros & Financeiro</span>
+                <div className="flex flex-wrap gap-3">
+                  <div className="flex items-center gap-2 text-xs font-medium text-white bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                    React
                   </div>
-                  <div className="flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/10 px-4 py-2 rounded-lg border border-blue-100 dark:border-blue-800/30">
-                    <span className="material-symbols-outlined text-lg">language</span>
-                    <span>Site Institucional</span>
+                  <div className="flex items-center gap-2 text-xs font-medium text-white bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                    SEO Integration
                   </div>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
-                <a
-                  href="https://www.simmaisseguros.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-white text-base font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] hover:-translate-y-1"
-                >
-                  Visitar Projeto
-                  <span className="material-symbols-outlined">arrow_outward</span>
-                </a>
-              </div>
+              <a
+                href="https://www.simmaisseguros.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-black font-semibold tracking-wide transition-all duration-300 hover:scale-[1.02] hover:bg-zinc-200"
+              >
+                Ver Aplicação
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
             </div>
-
           </div>
-        </div>
+        </FadeIn>
 
         {/* Aires Films Card */}
-        <div className="glass-card rounded-3xl p-8 md:p-12 border border-white/20 dark:border-slate-800 bg-white/50 dark:bg-slate-900/40 mt-8">
-          <div className="flex flex-col md:flex-row items-center gap-12">
+        <FadeIn delay={0.4}>
+          <div className="relative overflow-hidden rounded-4xl p-8 md:p-14 border border-white/5 bg-zinc-950/40 backdrop-blur-xl group">
+            <div className="flex flex-col md:flex-row items-center gap-14">
 
-            {/* Image Section (Left) */}
-            <div className="flex-shrink-0 relative group w-full md:w-1/2">
-              <div className="absolute -inset-3 bg-gradient-to-br from-primary to-blue-600 rounded-2xl opacity-20 group-hover:opacity-40 blur-lg transition duration-500"></div>
-              <div className="relative overflow-hidden rounded-2xl shadow-xl border border-white/10">
-                <img
-                  alt="Aires Films Landing Page"
-                  className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
-                  src="/Captura de tela 2026-02-18 154059.png"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
-              </div>
-            </div>
-
-            {/* Content Section (Right) */}
-            <div className="flex-1 text-center md:text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/20 text-primary text-xs font-bold uppercase tracking-wide mb-6">
-                Case de Sucesso
-              </div>
-
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6">
-                Aires <span className="text-primary">Films</span>
-              </h2>
-
-              <div className="space-y-6 text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-8">
-                <p>
-                  Landing page moderna para produtora de filmes. Design cinematográfico que captura a essência criativa e profissional da marca.
-                </p>
-
-                <div className="flex flex-wrap justify-center md:justify-start gap-4">
-                  <div className="flex items-center gap-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/10 px-4 py-2 rounded-lg border border-emerald-100 dark:border-emerald-800/30">
-                    <span className="material-symbols-outlined text-lg">movie</span>
-                    <span>Produtora de Filmes</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/10 px-4 py-2 rounded-lg border border-blue-100 dark:border-blue-800/30">
-                    <span className="material-symbols-outlined text-lg">web</span>
-                    <span>Landing Page</span>
-                  </div>
+              {/* Image Section (Left) */}
+              <div className="flex-shrink-0 relative w-full md:w-[55%]">
+                <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-zinc-900 group-hover:border-white/20 transition-colors duration-700">
+                  <img
+                    alt="Aires Films Landing Page"
+                    className="w-full h-auto object-cover transform group-hover:scale-[1.03] transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]"
+                    src="/Captura de tela 2026-02-18 154059.png"
+                  />
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
+              {/* Content Section (Right) */}
+              <div className="flex-1">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 text-zinc-300 text-xs font-semibold tracking-widest uppercase mb-6 bg-white/5">
+                  High-Performance Gateway
+                </div>
+
+                <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">
+                  Aires Films
+                </h3>
+
+                <div className="space-y-6 text-zinc-400 font-light text-lg leading-relaxed mb-10">
+                  <p>
+                    Portal cinemático projetado para carregar mídias pesadas instantaneamente. Utilização intensiva de Framer Motion para fluidez de navegação em uma estrutura Vite leve.
+                  </p>
+
+                  <div className="flex flex-wrap gap-3">
+                    <div className="flex items-center gap-2 text-xs font-medium text-white bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                      Vite
+                    </div>
+                    <div className="flex items-center gap-2 text-xs font-medium text-white bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                      Framer Motion
+                    </div>
+                  </div>
+                </div>
+
                 <a
                   href="https://landin-page-aires-films.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-white text-base font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] hover:-translate-y-1"
+                  className="inline-flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-black font-semibold tracking-wide transition-all duration-300 hover:scale-[1.02] hover:bg-zinc-200"
                 >
-                  Visitar Projeto
-                  <span className="material-symbols-outlined">arrow_outward</span>
+                  Ver Aplicação
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
                 </a>
               </div>
-            </div>
 
+            </div>
           </div>
-        </div>
+        </FadeIn>
 
       </div>
     </section>

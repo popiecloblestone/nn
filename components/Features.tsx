@@ -1,37 +1,46 @@
 import React from 'react';
+import FadeIn from './FadeIn';
 
 const Features: React.FC = () => {
   return (
-    <section className="py-20 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center divide-y md:divide-y-0 md:divide-x divide-slate-100 dark:divide-slate-800">
-          <div className="flex flex-col items-center px-4 py-4">
-            <span className="material-symbols-outlined text-4xl text-primary mb-4">bolt</span>
-            <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
-              Velocidade Relâmpago
+    <section className="py-24 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center divide-y md:divide-y-0 md:divide-x divide-white/5">
+          <FadeIn delay={0.1} className="flex flex-col items-center px-4 py-8 group">
+            <div className="w-12 h-12 flex items-center justify-center rounded-full bg-zinc-900 border border-white/10 mb-6 group-hover:bg-white group-hover:text-black transition-all duration-300">
+              <span className="material-symbols-outlined text-2xl">bolt</span>
+            </div>
+            <h4 className="text-xl font-semibold text-white mb-3 tracking-tight">
+              Latência Analisada
             </h4>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
-              Sites otimizados que carregam em milissegundos, melhorando o SEO e a retenção.
+            <p className="text-base text-zinc-400 font-light leading-relaxed">
+              Respostas em sub-segundos. Arquiteturas avaliadas continuamente para maximizar LCP e minimizar tempo de interação (TTI).
             </p>
-          </div>
-          <div className="flex flex-col items-center px-4 py-4">
-            <span className="material-symbols-outlined text-4xl text-primary mb-4">diamond</span>
-            <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
-              Design Exclusivo
+          </FadeIn>
+
+          <FadeIn delay={0.3} className="flex flex-col items-center px-4 py-8 group">
+             <div className="w-12 h-12 flex items-center justify-center rounded-full bg-zinc-900 border border-white/10 mb-6 group-hover:bg-white group-hover:text-black transition-all duration-300">
+              <span className="material-symbols-outlined text-2xl">diamond</span>
+            </div>
+            <h4 className="text-xl font-semibold text-white mb-3 tracking-tight">
+              Design System Escalável
             </h4>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
-              Nada de templates prontos. Visual único desenhado para destacar sua marca.
+            <p className="text-base text-zinc-400 font-light leading-relaxed">
+              Consistência visual mantida através de tokens estritos, garantindo fácil manutenibilidade por times de Produto e Engenharia.
             </p>
-          </div>
-          <div className="flex flex-col items-center px-4 py-4">
-            <span className="material-symbols-outlined text-4xl text-primary mb-4">trending_up</span>
-            <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
-              Foco em ROI
+          </FadeIn>
+
+          <FadeIn delay={0.5} className="flex flex-col items-center px-4 py-8 group">
+             <div className="w-12 h-12 flex items-center justify-center rounded-full bg-zinc-900 border border-white/10 mb-6 group-hover:bg-white group-hover:text-black transition-all duration-300">
+              <span className="material-symbols-outlined text-2xl">troubleshoot</span>
+            </div>
+            <h4 className="text-xl font-semibold text-white mb-3 tracking-tight">
+              Arquitetura de Conversão
             </h4>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
-              Cada pixel é pensado para converter visitantes em clientes pagantes.
+            <p className="text-base text-zinc-400 font-light leading-relaxed">
+              Interfaces guiadas por dados. Remoção de pontos de fricção através de testes A/B estruturados e heatmaps comportamentais.
             </p>
-          </div>
+          </FadeIn>
         </div>
       </div>
     </section>

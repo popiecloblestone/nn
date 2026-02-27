@@ -1,53 +1,99 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import FadeIn from './FadeIn';
+
+const services = [
+  {
+    id: '01',
+    title: 'Performance Frontend',
+    description: 'Interfaces otimizadas ao extremo. Foco absoluto no Core Web Vitals (LCP, FID, CLS) para reduzir o bounce rate e maximizar a retenção.',
+    metric: 'LCP < 0.8s'
+  },
+  {
+    id: '02',
+    title: 'Arquitetura de Sistemas',
+    description: 'Design estrutural projetado para hiperescala. Implementação de ecossistemas robustos (integração de APIs, Headless CMS e Serverless DBs).',
+    metric: 'Zero Downtime'
+  },
+  {
+    id: '03',
+    title: 'Sustentação & Escala',
+    description: 'Auditoria de código, mitigação de dívida técnica e segurança by design. Ambientes seguros com Single Point of Failure nulo.',
+    metric: '99.9% Uptime'
+  }
+];
 
 const Services: React.FC = () => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   return (
-    <section className="py-24 relative overflow-hidden">
-      <div className="gradient-blob top-1/2 right-0 translate-x-1/2 opacity-40"></div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl mb-4">
-            O que eu ofereço
-          </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Soluções completas para cada etapa da sua jornada digital.
-          </p>
+    <section className="py-32 md:py-48 relative overflow-hidden bg-black text-white" id="services">
+      <div className="max-w-[90rem] mx-auto px-6 lg:px-8 relative z-10 w-full">
+        
+        <FadeIn className="mb-20">
+           <div className="flex items-center gap-4 mb-6">
+             <span className="w-2 h-2 rounded-full bg-zinc-500"></span>
+             <span className="text-sm font-mono tracking-widest uppercase text-zinc-500">Capacidades</span>
+           </div>
+           <h2 className="text-4xl md:text-5xl font-light tracking-tight text-white max-w-2xl">
+              Nossa expertise técnica traduzida em <span className="text-zinc-500 italic">vantagem competitiva.</span>
+           </h2>
+        </FadeIn>
+
+        <div className="border-t border-zinc-800 flex flex-col w-full">
+          {services.map((service, index) => {
+            const isHovered = hoveredIndex === index;
+            
+            return (
+              <div 
+                key={service.id}
+                className="group border-b border-zinc-800 relative py-12 md:py-16 transition-colors duration-500 hover:bg-zinc-900/30 cursor-none flex flex-col cursor-none"
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
+                {/* Header row: Number + Huge Title */}
+                <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-12 relative z-10 w-full justify-between pr-4 md:pr-12 cursor-none">
+                  <div className="flex items-baseline gap-4 md:gap-12 cursor-none">
+                    <span className="text-lg md:text-2xl font-mono text-zinc-600 font-light cursor-none transition-colors duration-500 group-hover:text-zinc-400">
+                      {service.id}
+                    </span>
+                    <h3 className="text-5xl md:text-7xl lg:text-[7rem] font-bold tracking-tighter uppercase transition-colors duration-500 text-zinc-300 group-hover:text-white cursor-none leading-[0.9]">
+                      {service.title}
+                    </h3>
+                  </div>
+                  
+                  {/* Decorative Icon that appears on hover */}
+                  <div className="hidden md:flex items-center justify-center opacity-0 -translate-x-8 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-white cursor-none">
+                     <span className="material-symbols-outlined text-5xl font-light cursor-none">arrow_forward</span>
+                  </div>
+                </div>
+
+                {/* Expandable Content Area */}
+                <AnimatePresence>
+                  {isHovered && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden cursor-none"
+                    >
+                      <div className="pt-8 md:pt-12 md:pl-[6rem] lg:pl-[9rem] flex flex-col md:flex-row gap-8 md:gap-16 items-start cursor-none">
+                         <p className="text-xl md:text-2xl font-light text-zinc-400 max-w-2xl leading-relaxed cursor-none">
+                           {service.description}
+                         </p>
+                         <div className="mt-4 md:mt-0 px-6 py-3 rounded-full border border-zinc-700 text-sm font-mono text-zinc-300 whitespace-nowrap cursor-none">
+                           Padrão: {service.metric}
+                         </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="glass-card rounded-2xl p-8 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 group">
-            <div className="size-14 rounded-xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-300 text-primary">
-              <span className="material-symbols-outlined text-3xl">rocket_launch</span>
-            </div>
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">
-              Landing Pages de Alta Conversão
-            </h3>
-            <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              Páginas otimizadas para vender. Design focado na experiência do usuário e copywriting estratégico para maximizar leads e vendas.
-            </p>
-          </div>
-          <div className="glass-card rounded-2xl p-8 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 group">
-            <div className="size-14 rounded-xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-300 text-primary">
-              <span className="material-symbols-outlined text-3xl">apartment</span>
-            </div>
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">
-              Sites Institucionais Modernos
-            </h3>
-            <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              Fortaleça sua marca com um site profissional, responsivo e gerenciável. A vitrine perfeita para o seu negócio na internet.
-            </p>
-          </div>
-          <div className="glass-card rounded-2xl p-8 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 group">
-            <div className="size-14 rounded-xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-300 text-primary">
-              <span className="material-symbols-outlined text-3xl">build_circle</span>
-            </div>
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">
-              Manutenção e Otimização
-            </h3>
-            <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              Não basta lançar, é preciso evoluir. Mantenha seu site rápido, seguro e atualizado com as últimas tecnologias do mercado.
-            </p>
-          </div>
-        </div>
+
       </div>
     </section>
   );

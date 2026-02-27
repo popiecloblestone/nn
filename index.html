@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="dark cursor-none">
 
 <head>
   <meta charset="utf-8" />
@@ -7,16 +7,25 @@
   <title>Saracura DEV - High Performance Web Development</title>
   <link href="https://fonts.googleapis.com" rel="preconnect" />
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <!-- Critical fonts: Inter + JetBrains Mono with font-display=swap to prevent FOIT -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
     rel="stylesheet" />
+  <!-- Material Symbols: non-critical, loaded asynchronously after page render -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-    rel="stylesheet" />
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=optional"
+    rel="preload"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=optional"
+      rel="stylesheet" />
+  </noscript>
 </head>
 
 <body
-  class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-400 overflow-x-hidden relative transition-colors duration-300">
+  class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-400 overflow-x-hidden relative transition-colors duration-300 cursor-none">
   <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>

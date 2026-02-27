@@ -22,6 +22,21 @@ export default defineConfig(({ mode }) => {
       alias: {
         '@': path.resolve(__dirname, '.'),
       }
+    },
+    build: {
+      target: 'es2020',
+      cssCodeSplit: true,
+      assetsInlineLimit: 4096, // Inline assets < 4KB as base64 (no extra HTTP request)
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            // Heavy animation lib gets its own chunk – cached separately
+            'framer-motion': ['framer-motion'],
+            // React core chunks (cached across deploys)
+            vendor: ['react', 'react-dom'],
+          }
+        }
+      }
     }
   };
 });
