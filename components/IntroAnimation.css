@@ -1,0 +1,168 @@
+/* =======================================================
+   IntroAnimation — Saracura Dev Cinematic Intro Splash
+   ======================================================= */
+
+@keyframes saracuraBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Root overlay — sits on top of everything */
+.intro-root {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* ── Door panels ─────────────────────────────────────── */
+.intro-door {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  background: #000;
+  will-change: transform;
+}
+
+.intro-door-left {
+  left: 0;
+  transform-origin: left center;
+}
+
+.intro-door-right {
+  right: 0;
+  transform-origin: right center;
+}
+
+/* Transition added dynamically via data-state to avoid
+   firing instantly on mount */
+.intro-door[data-open="true"] {
+  transition: transform 0.95s cubic-bezier(0.76, 0, 0.24, 1),
+              opacity  0.4s ease;
+}
+
+.intro-door-left[data-open="true"]  { transform: translateX(-100%); }
+.intro-door-right[data-open="true"] { transform: translateX(100%);  }
+
+/* Thin edge highlight at the split seam */
+.intro-door-edge {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 255, 255, 0.15) 40%,
+    rgba(255, 255, 255, 0.15) 60%,
+    transparent
+  );
+}
+
+.intro-door-left  .intro-door-edge { right: 0; }
+.intro-door-right .intro-door-edge { left: 0;  }
+
+/* ── Center content ──────────────────────────────────── */
+.intro-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.4s ease;
+}
+
+.intro-content[data-hidden="true"] {
+  opacity: 0;
+}
+
+/* Ambient glow behind text */
+.intro-glow {
+  position: absolute;
+  width: 500px;
+  height: 200px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.05) 0%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+/* Typewriter headline */
+.intro-headline {
+  font-family: 'Inter', 'Outfit', system-ui, -apple-system, sans-serif;
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  -webkit-user-select: none;
+  user-select: none;
+  position: relative;
+}
+
+/* Blinking cursor bar */
+.intro-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.85em;
+  background: #fff;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-radius: 1px;
+}
+
+.intro-cursor[data-blink="true"] {
+  animation: saracuraBlink 0.7s step-end infinite;
+}
+
+/* Tagline / sub-headline */
+.intro-tagline {
+  font-family: 'Inter', 'Outfit', system-ui, -apple-system, sans-serif;
+  font-size: clamp(0.75rem, 1.5vw, 1rem);
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.35);
+  margin-top: 1.25rem;
+  padding: 0 1rem;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.intro-tagline[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Decorative divider line */
+.intro-divider {
+  margin-top: 2.5rem;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transition: width 0.8s ease 0.3s;
+}
+
+.intro-divider[data-visible="true"] {
+  width: 120px;
+}

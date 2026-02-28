@@ -65,11 +65,11 @@ export const TextReveal: React.FC<TextRevealProps> = ({
                     variants={containerVariants}
                     initial="hidden"
                     animate={isInView ? "visible" : "hidden"}
-                    style={{ display: 'inline-flex', flexWrap: 'wrap' }}
+                    className="inline-flex flex-wrap"
                 >
                     {elements.map((element, index) => (
-                        <span key={index} style={{ overflow: 'hidden', display: 'inline-flex', marginRight: splitBy === 'words' ? '0.25em' : '0' }}>
-                           <motion.span variants={childVariants} style={{ display: 'inline-block', transformOrigin: 'bottom left' }}>
+                        <span key={index} className={`overflow-hidden inline-flex ${splitBy === 'words' ? 'mr-1' : ''}`}>
+                           <motion.span variants={childVariants} className="inline-block origin-bottom-left">
                                 {element === ' ' ? '\u00A0' : element} {/* Handle spaces natively if character split is ever used with string containing spaces */}
                            </motion.span>
                         </span>
